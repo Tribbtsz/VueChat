@@ -14,12 +14,15 @@
       </select>
     </div>
     <div>
-      <textarea v-model="chatContent"></textarea>
-      <button @click="sendMessage()">发送消息</button>
-    </div>
-    <div>
       <button @click="getSubscription()">获取余额</button>
+      <div v-if="subscription">
+        <div>余额：{{ subscription.soft_limit_usd }}</div>
+      </div>
+
       <button @click="getUsage()">获取消费</button>
+      <div v-if="usage">
+        <div>消费：{{ usage.total_usage }}</div>
+      </div>
     </div>
     <div>
       <ul>
@@ -40,6 +43,8 @@ export default {
       selectedModel: '',
       chatContent: '',
       messages: [],
+      subscription: null, // 新增
+      usage: null, // 新增
     }
   },
   methods: {
@@ -53,11 +58,11 @@ export default {
     },
     async getSubscription() {
       const { data } = await axios.get('/api/subscription');
-      // 显示或处理返回的余额数据
+      this.subscription = data; // 将数据保存到组件状态中
     },
     async getUsage() {
       const { data } = await axios.get('/api/usage');
-      // 显示或处理返回的消费数据
+      this.usage = data; // 将数据保存到组件状态中
     }
   }
 };
