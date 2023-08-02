@@ -47,8 +47,8 @@ export default {
       selectedModel: '',
       chatContent: '',
       messages: [],
-      subscription: null, // 新增
-      usage: null, // 新增
+      subscription: null,
+      usage: null,
     }
   },
   methods: {
@@ -62,11 +62,11 @@ export default {
     },
     async getSubscription() {
       const { data } = await axios.get('/api/subscription');
-      this.subscription = data; // 将数据保存到组件状态中
+      this.subscription = data;
     },
     async getUsage() {
       const { data } = await axios.get('/api/usage');
-      this.usage = data; // 将数据保存到组件状态中
+      this.usage = data;
     }
   }
 };
