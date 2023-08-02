@@ -30,10 +30,11 @@
     </div>
     <div>
       <ul>
-        <li v-for="message in messages" :key="message.id">
-          {{ message.content }}
+        <li v-for="(message, index) in messages" :key="index">
+           {{ message.content }}
         </li>
       </ul>
+
     </div>
   </div>
 </template>
@@ -54,10 +55,11 @@ export default {
   methods: {
     async sendMessage() {
       const { data } = await axios.post('/api/chat', {
-        model: this.selectedModel,
-        message: this.chatContent,
-      });
-      this.messages.push(data.message);
+      model: this.selectedModel,
+      message: this.chatContent,
+    });
+	this.messages.push(data.choices[0].message);
+
       this.chatContent = '';
     },
     async getSubscription() {
