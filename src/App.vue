@@ -14,6 +14,10 @@
       </select>
     </div>
     <div>
+      <textarea v-model="chatContent"></textarea>
+      <button @click="sendMessage()">发送消息</button>
+    </div>
+    <div>
       <button @click="getSubscription()">获取余额</button>
       <div v-if="subscription">
         <div>余额：{{ subscription.soft_limit_usd }}</div>
