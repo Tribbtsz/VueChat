@@ -2,9 +2,8 @@
   <div id="app" class="container">
     <div class="header">
       <div>
-        <label for="model">选择模型:</label>
+        <label for="model" :style="{ 'margin-right': '5px' ,'padding-top': '5px',color: '#aafff'}">选择模型:</label>
         <select v-model="selectedModel" :style="{ backgroundColor: modelColor, color: '#fff' }">
-          <option disabled value="">请选择模型</option>
           <option>gpt-3.5-turbo</option>
           <option>gpt-3.5-turbo-16k</option>
           <option>gpt-3.5-turbo-0301</option>
@@ -15,12 +14,12 @@
         </select>
       </div>
       <div>
-        <button @click="getSubscription()">获取余额</button>
+        <button @click="getSubscription()" :style="{ backgroundColor: '#708090','margin-right': '5px'}">获取余额</button>
         <div v-if="subscription">
           <div>余额：{{ subscription.soft_limit_usd }}</div>
         </div>
 
-        <button @click="getUsage()">获取消费</button>
+        <button @click="getUsage()" :style="{ backgroundColor: '#708090','margin-right': '5px'}">获取消费</button>
         <div v-if="usage">
           <div>消费：{{ usage.total_usage }}</div>
         </div>
@@ -48,7 +47,7 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      selectedModel: '',
+      selectedModel: 'gpt-3.5-turbo',
       chatContent: '',
       messages: [],
       subscription: null,
@@ -110,8 +109,8 @@ body {
   background-color: #2d323e;
   border-radius: 10px;
   padding: 20px;
-  width: 60%;
-  height: 80%;
+  width: 700px;
+  height: 95%;
 }
 
 .header {
@@ -161,7 +160,9 @@ button {
 button:hover {
   background-color: #45a049;
 }
-
+button:active {
+  transform: scale(0.95);
+}
 ul {
   list-style-type: none;
   margin: 0;
